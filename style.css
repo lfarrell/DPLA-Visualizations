@@ -40,8 +40,8 @@ input[type=text] {
 
 input[type=submit] {
     color: white;
-    background-color: royalblue;
-    border-color: royalblue;
+    background-color: steelblue;
+    border-color: steelblue;
     font-weight: bold;
     width: 100px;
     height: 35px;

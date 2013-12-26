@@ -74,7 +74,7 @@
 
                         svg.append("g")
                                 .attr("class", "axis")
-                                .attr("transform", "translate(" + 25 + ", 0)")
+                                .attr("transform", "translate(" + 28 + ", 0)")
                                 .call(yAxis);
                     });
                 } else {
