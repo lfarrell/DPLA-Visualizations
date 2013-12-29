@@ -121,6 +121,10 @@
             font-size: 11px;
         }
 
+        rect:hover {
+            fill: orange;
+        }
+
         div.tooltip {
             position: absolute;
             text-align: center;
