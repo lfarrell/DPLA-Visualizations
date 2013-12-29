@@ -6,7 +6,13 @@ class DplaHistogram extends DplaBase {
      * @return mixed
      */
     public function curl_call() {
-        $full_call = "http://api.dp.la/v2/items?q=" . $this->q . "&fields=sourceResource.date.begin,sourceResource.date.end&page_size=500&api_key=" . $this->api_key;
+        if(!$this->decade) {
+            $full_call = $this->q . "&fields=sourceResource.temporal.begin&page_size=500&api_key=" . $this->api_key;
+        } else {
+            $decade_end = $this->decade + 9;
+            $full_call = $this->q . "&sourceResource.temporal.begin=$this->decade&sourceResource.temporal.end=$decade_end&api_key=" . $this->api_key;
+        }
+
         $ch = curl_init($full_call);
         curl_setopt($ch, CURLOPT_HEADER, 0);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -16,14 +22,26 @@ class DplaHistogram extends DplaBase {
         return $data;
     }
 
-    public function process_json($response) {
+    private function get_all_results($response) {
+        $start = 0;
         $records = json_decode($response, true);
+
+        $total_records = $records['count'];
+    }
+
+    /**
+     * @param $response
+     * @return mixed|void
+     */
+    public function process_json($response) {
+        $records = $this->get_json($response);
+
 
         // Get rid of entries with no date
         $years = array();
         foreach($records['docs'] as $record) {
-            if(!empty($record['sourceResource.date.begin'])) {
-                $years[] = $record['sourceResource.date.begin'];
+            if(!empty($record['sourceResource.temporal.begin'][0])) {
+                $years[] = $record['sourceResource.temporal.begin'][0];
             }
         }
 
@@ -51,8 +69,33 @@ class DplaHistogram extends DplaBase {
 
         echo json_encode($d3_decades);
     }
+
+    /**
+     * @param $response
+     */
+    public function get_record_sample($response) {
+        $records = $this->get_json($response);
+        $html = "<ul>";
+        foreach($records['docs'] as $record) {
+            $title = '';
+            foreach($record['sourceResource']['title'] as $titles) {
+                $title .= $titles . "\s";
+            }
+            $html .= '<li><a href="http://dp.la/item/' . $record['id'] . '" target="_blank">' . $title . '</a></li>';
+        }
+        $html .= "</ul>";
+
+        echo $html;
+    }
 }
 
-$img = new DplaHistogram($api_key, $_GET['q']);
-$response = $img->curl_call();
-$img->process_json($response);
+if($_GET) {
+    $img = new DplaHistogram($api_key, $_GET);
+    $response = $img->curl_call();
+}
+
+if(!$_GET['decade']) {
+    $img->process_json($response);
+} else {
+    $img->get_record_sample($response);
+}

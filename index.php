@@ -3,7 +3,7 @@
 <head>
     <title>DPLA Visualizations</title>
     <link rel="stylesheet" href="style.css" />
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
     <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
     <script type="text/javascript">
         $(function() {
@@ -46,15 +46,13 @@
                                 .domain([d3.max(data, function(d) { return d.count; }), 0])
                                 .range([0, height]);
 
-
-
                         svg.selectAll("rect")
                                 .data(data, function(d) {
                                     return d.decade;
                                 })
                                 .enter()
                                 .append("rect")
-                                .attr("x", function(d, i) {
+                                .attr("x", function(d) {
                                     return xScale(d.decade);
                                 })
                                 .attr("y", function(d) {
@@ -69,7 +67,9 @@
                                     div.transition()
                                         .duration(200)
                                         .style("opacity", .9);
-                                    div .html("Your term(s) appeared " + d.count + " times<br/>in the "  + d.decade + "'s")
+
+                                    div .html("Your term(s) appeared in <br/>" + d.count + " records in the "  + d.decade + "'s"
+                                        + "<br/><br/>Click highlighted bar to view records")
                                         .style("left", (d3.event.pageX - 28) + "px")
                                         .style("top", (d3.event.pageY - 28) + "px");
                                 })
@@ -77,7 +77,17 @@
                                     div.transition()
                                         .duration(500)
                                         .style("opacity", 0);
-                            });
+                                })
+                                .on("click", function(d) {
+                                    $.get("DplaHistogram.php?q=" + q + "&decade=" + d.decade, function(data) {
+                                        var recs = $('#records');
+                                        if(recs.length === 0) {
+                                            d3.select("body").append("div")
+                                                .attr("id", "records");
+                                        }
+                                        recs.html(data);
+                                    });
+                                });
 
                         var xAxis = d3.svg.axis()
                                 .scale(xScale)
@@ -137,6 +147,14 @@
             border: 0px;
             border-radius: 8px;
             pointer-events: none;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        ul a {
+            text-decoration: none;
         }
     </style>
 </head>

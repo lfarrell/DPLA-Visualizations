@@ -16,8 +16,12 @@ class DplaMap extends DplaBase {
         return $data;
     }
 
+    /**
+     * @param $response
+     * @return mixed|void
+     */
     public function process_json($response) {
-        $records = json_decode($response, true);
+        $records = $this->get_json($response);
         $values = array();
         $i = 0;
         foreach($records['docs'] as $record) {

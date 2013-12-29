@@ -11,7 +11,8 @@ abstract class DplaBase {
      */
     public function __construct($api_key, $query) {
         $this->api_key = $api_key;
-        $this->q = $this->clean($query);
+        $this->q = "http://api.dp.la/v2/items?q=" . $this->clean($query['q']);
+        $this->decade = (isset($query['decade'])) ? $this->clean($query['decade']) : false;
     }
 
     /**
@@ -26,10 +27,18 @@ abstract class DplaBase {
     abstract public function process_json($response);
 
     /**
+     * @param $response
+     * @return mixed
+     */
+    protected function get_json($response) {
+        return json_decode($response, true);
+    }
+
+    /**
      * @param $url
      * @return string
      */
-    private function clean($url) {
+    protected function clean($url) {
         $clean = strip_tags(trim($url));
 
         return preg_replace('/(\s{1,}|,)/', '+AND+', $clean);
