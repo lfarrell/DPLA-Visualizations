@@ -149,6 +149,13 @@
             pointer-events: none;
         }
 
+        ul {
+            border: 1px solid lightgray;
+            padding: 25px;
+            border-radius: 5px;
+            width: 50%;
+        }
+
         ul a {
             text-decoration: none;
             color: steelblue;
