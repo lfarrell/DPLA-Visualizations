@@ -80,12 +80,11 @@
                                 })
                                 .on("click", function(d) {
                                     $.get("DplaHistogram.php?q=" + q + "&decade=" + d.decade, function(data) {
-                                        var recs = $('#records');
-                                        if(recs.length === 0) {
+                                        if($('#records').length === 0) {
                                             d3.select("body").append("div")
                                                 .attr("id", "records");
                                         }
-                                        recs.html(data);
+                                        $('#records').html(data);
                                     });
                                 });
 
@@ -149,12 +148,9 @@
             pointer-events: none;
         }
 
-        ul {
-            list-style-type: none;
-        }
-
         ul a {
             text-decoration: none;
+            color: steelblue;
         }
     </style>
 </head>

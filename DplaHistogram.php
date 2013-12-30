@@ -10,6 +10,7 @@ class DplaHistogram extends DplaBase {
             $full_call = $this->q . "&fields=sourceResource.temporal.begin&page_size=500&api_key=" . $this->api_key;
         } else {
             $decade_end = $this->decade + 9;
+        //    echo $this->q . "&sourceResource.temporal.begin=$this->decade&sourceResource.temporal.end=$decade_end&api_key=" . $this->api_key; exit;
             $full_call = $this->q . "&sourceResource.temporal.begin=$this->decade&sourceResource.temporal.end=$decade_end&api_key=" . $this->api_key;
         }
 
@@ -77,11 +78,8 @@ class DplaHistogram extends DplaBase {
         $records = $this->get_json($response);
         $html = "<ul>";
         foreach($records['docs'] as $record) {
-            $title = '';
-            foreach($record['sourceResource']['title'] as $titles) {
-                $title .= $titles . "\s";
-            }
-            $html .= '<li><a href="http://dp.la/item/' . $record['id'] . '" target="_blank">' . $title . '</a></li>';
+            $title = (is_array($record['sourceResource']['title'])) ? $record['sourceResource']['title'][0] : $record['sourceResource']['title'];
+                $html .= '<li><a href="http://dp.la/item/' . $record['id'] . '" target="_blank">' . $title . '</a></li>';
         }
         $html .= "</ul>";
 
