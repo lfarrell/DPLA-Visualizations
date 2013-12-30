@@ -72,11 +72,23 @@ class DplaHistogram extends DplaBase {
     }
 
     /**
+     * Get query terms
+     * @return mixed
+     */
+    private function get_terms() {
+        $q = preg_split('/q=/', $this->q);
+
+        return $q[1];
+    }
+
+    /**
      * @param $response
      */
     public function get_record_sample($response) {
         $records = $this->get_json($response);
-        $html = "<ul>";
+
+        $html = "<h2>Sample records for (" . $this->get_terms() . ") for the decade $this->decade's</h2>";
+        $html .= "<ul>";
         foreach($records['docs'] as $record) {
             $title = (is_array($record['sourceResource']['title'])) ? $record['sourceResource']['title'][0] : $record['sourceResource']['title'];
                 $html .= '<li><a href="http://dp.la/item/' . $record['id'] . '" target="_blank">' . $title . '</a></li>';
