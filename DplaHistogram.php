@@ -7,10 +7,9 @@ class DplaHistogram extends DplaBase {
      */
     public function curl_call() {
         if(!$this->decade) {
-            $full_call = $this->q . "&fields=sourceResource.temporal.begin&page_size=500&api_key=" . $this->api_key;
+            $full_call = $this->q . "&fields=sourceResource.date.displayDate&page_size=500&api_key=" . $this->api_key;
         } else {
             $decade_end = $this->decade + 9;
-        //    echo $this->q . "&sourceResource.temporal.begin=$this->decade&sourceResource.temporal.end=$decade_end&api_key=" . $this->api_key; exit;
             $full_call = $this->q . "&sourceResource.temporal.begin=$this->decade&sourceResource.temporal.end=$decade_end&api_key=" . $this->api_key;
         }
 
@@ -41,21 +40,24 @@ class DplaHistogram extends DplaBase {
         // Get rid of entries with no date
         $years = array();
         foreach($records['docs'] as $record) {
-            if(!empty($record['sourceResource.temporal.begin'][0])) {
-                $years[] = $record['sourceResource.temporal.begin'][0];
+            if(!empty($record['sourceResource.date.displayDate'])) {
+                $years[] = $record['sourceResource.date.displayDate'];
             }
         }
 
         // Sort records by decade
         $decades = array();
         foreach($years as $year) {
-            $year_normalize = preg_split('/-/', $year); // data can vary
-            $year_base = substr($year_normalize[0], 0, 3) . "0";
+            preg_match('/\d{4}/', $year, $matches); // data can vary
 
-            if(array_key_exists($year_base, $decades)) {
-                $decades[$year_base] += 1;
-            } else {
-                $decades[$year_base] = 1;
+            if($matches[0]) {
+                $year_base = substr($matches[0], 0, 3) . "0";
+
+                if(array_key_exists($year_base, $decades)) {
+                    $decades[$year_base] += 1;
+                } else {
+                    $decades[$year_base] = 1;
+                }
             }
         }
         ksort($decades);

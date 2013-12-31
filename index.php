@@ -17,7 +17,7 @@
                 if(q) {
                     $('svg').detach();
                     $.getJSON("DplaHistogram.php?q=" + q, function(data) {
-                        var margin = {top: 30, right: 20, bottom: 50, left: 26},
+                        var margin = {top: 30, right: 20, bottom: 50, left: 28},
                             axisPadding = 5,
                             height = 450 - margin.top - margin.bottom,
                             width = 1100 - margin.left - margin.right;
