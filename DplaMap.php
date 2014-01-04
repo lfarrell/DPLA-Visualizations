@@ -6,7 +6,7 @@ class DplaMap extends DplaBase {
      * @return mixed
      */
     public function curl_call() {
-        $full_call = "http://api.dp.la/v2/items?q=" . $this->q . "&fields=sourceResource.title,sourceResource.description,sourceResource.identifier,isShownAt,sourceResource.spatial.coordinates&page_size=500&api_key=" . $this->api_key;
+        $full_call = $this->q . "&fields=sourceResource.title,sourceResource.description,sourceResource.identifier,isShownAt,sourceResource.spatial.coordinates&page_size=500&api_key=" . $this->api_key;
         $ch = curl_init($full_call);
         curl_setopt($ch, CURLOPT_HEADER, 0);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -39,6 +39,6 @@ class DplaMap extends DplaBase {
     }
 }
 
-$img = new DplaMap($api_key, $_GET['q']);
+$img = new DplaMap($api_key, $_GET);
 $response = $img->curl_call();
 $img->process_json($response);
