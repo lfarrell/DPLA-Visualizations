@@ -39,7 +39,7 @@
             var height = 600;
             var color = d3.scale.category20();
             var outerRadius = width / 3;
-            var innerRadius = 75;
+            var innerRadius = 50;
 
             var arc = d3.svg.arc()
                 .innerRadius(innerRadius)
@@ -88,7 +88,7 @@
 
             var legend = svg.append("g")
                 .attr("class", "legend")
-                .attr("x", width - 265)
+                .attr("x", width - 270)
                 .attr("y", 40)
                 .attr("height", "auto")
                 .attr("width", 295);
@@ -99,15 +99,15 @@
                 .each(function(d, i) {
                     var g = d3.select(this);
                     g.append("rect")
-                        .attr("x", width - 260)
+                        .attr("x", width - 265)
                         .attr("y", i*25)
                         .attr("width", 10)
                         .attr("height", 10)
                         .style("fill", color(i));
 
                     g.append("text")
-                        .attr("x", width - 245)
-                        .attr("y", i * 25 + 8)
+                        .attr("x", width - 250)
+                        .attr("y", i * 25 + 9)
                         .attr("height",30)
                         .attr("width",200)
                         .style("fill", "black")
