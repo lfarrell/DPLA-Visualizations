@@ -51,16 +51,12 @@
                         }
 
                         map.addLayer(markers);
-
+                        hide.addClass('hide');
                         message.text("Your search term(s): " + q);
                     });
                 } else {
                     message.text('Please enter a search phrase');
                 }
-
-                setTimeout(function() {
-                    hide.addClass('hide');
-                }, 1800);
             });
         });
     </script>

@@ -12,7 +12,9 @@
                 e.preventDefault();
                 var q = $('#q').val();
                 var message = $('#message').text("Your search phrase: " + q);
-                $('#hide').removeClass('hide');
+                var hide = $('#hide');
+
+                hide.removeClass('hide');
 
                 if(q) {
                     $('svg').detach();
@@ -106,14 +108,12 @@
                                 .attr("class", "axis")
                                 .attr("transform", "translate(" + margin.left + "," + axisPadding +")")
                                 .call(yAxis);
+
+                        hide.addClass('hide');
                     });
                 } else {
                     $('#message').text('Please submit a search term');
                 }
-
-                setTimeout(function() {
-                    $('#hide').addClass('hide');
-                }, 1800);
             });
         });
     </script>
