@@ -82,12 +82,21 @@
                                         .style("opacity", 0);
                                 })
                                 .on("click", function(d) {
+                                    d3.select("body").append("div")
+                                        .attr("id", "records");
+
+                                    window.location = '#records';
+
+                                    var recs = $('#records');
+                                    recs.html('<img src="ajax-loader.gif"/>')
+
                                     $.get("DplaHistogram.php?q=" + q + "&decade=" + d.decade, function(data) {
-                                        if($('#records').length === 0) {
-                                            d3.select("body").append("div")
-                                                .attr("id", "records");
+                                        if(data.length === 0) {
+                                            recs.html("<p>there were no records to add.</p>");
+                                        } else {
+                                            recs.html(data);
                                         }
-                                        $('#records').html(data);
+                                        $('#sample-records').addClass('hide');
                                     });
                                 });
 
