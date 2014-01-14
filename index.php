@@ -17,7 +17,7 @@
                 hide.removeClass('hide');
 
                 if(q) {
-                    $('svg').detach();
+                    $('svg, #records').detach();
                     $.getJSON("DplaHistogram.php?q=" + q, function(data) {
                         var margin = {top: 30, right: 20, bottom: 50, left: 28},
                             axisPadding = 5,
@@ -96,7 +96,6 @@
                                         } else {
                                             recs.html(data);
                                         }
-                                        $('#sample-records').addClass('hide');
                                     });
                                 });
 
