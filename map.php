@@ -45,7 +45,8 @@
                             }
                             var title = data[i].title;
                             var marker = L.marker(L.latLng(data[i].lat, data[i].lon), { title: title });
-                            marker.bindPopup('<strong>' + title + '</strong>' +
+                            marker.bindPopup('<strong>' + title + '</strong><br />' +
+                                    '<img src="' + data[i].path + '" width="100" height="100" style="border:1px solid gray"> ' +
                                     '<br />View this item <a target="_blank" href="' + data[i].link +'">here</a>');
                             markers.addLayer(marker);
                         }

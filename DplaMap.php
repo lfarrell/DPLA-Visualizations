@@ -6,7 +6,7 @@ class DplaMap extends DplaBase {
      * @return mixed
      */
     public function curl_call() {
-        $full_call = $this->q . "&fields=sourceResource.title,sourceResource.description,sourceResource.identifier,isShownAt,sourceResource.spatial.coordinates&page_size=500&api_key=" . $this->api_key;
+        $full_call = $this->q . "&fields=sourceResource.title,sourceResource.description,sourceResource.identifier,object,sourceResource.spatial.coordinates&page_size=500&api_key=" . $this->api_key;
         $ch = curl_init($full_call);
         curl_setopt($ch, CURLOPT_HEADER, 0);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -31,6 +31,7 @@ class DplaMap extends DplaBase {
             $values[$i]['link'] = $record['isShownAt'];
             $values[$i]['lat'] = $coords[0];
             $values[$i]['lon'] = $coords[1];
+            $values[$i]['path'] = $record['object'];
 
             $i++;
         }

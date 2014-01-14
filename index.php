@@ -85,7 +85,7 @@
                                     d3.select("body").append("div")
                                         .attr("id", "records");
 
-                                    window.location = '#records';
+
 
                                     var recs = $('#records');
                                     recs.html('<img src="ajax-loader.gif"/>')
@@ -96,6 +96,7 @@
                                         } else {
                                             recs.html(data);
                                         }
+                                        window.location = '#records';
                                     });
                                 });
 
