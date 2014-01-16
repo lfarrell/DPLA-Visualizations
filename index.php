@@ -121,6 +121,7 @@
                         hide.addClass('hide');
                     });
                 } else {
+                    hide.addClass('hide');
                     $('#message').text('Please submit a search term');
                 }
             });
