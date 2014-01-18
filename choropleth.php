@@ -25,9 +25,10 @@
                         var height = 600,
                             width = 850;
 
-                        var color = d3.scale.threshold()
-                            .domain([])
-                            .range([]);
+                        var color = d3.scale.quantize()
+                            .domain([0, d3.max(data, function(d) { return d.value; })])
+                            .range(["rgb(51,102,204)", "rgb(0,0,255)",
+                                "rgb(0,0,204)", "rgb(0,0,153)","rgb(0,0,102)"]);
 
                         var projection = d3.geo.albersUsa()
                             .translate([width/2, height/2])
@@ -40,16 +41,46 @@
                             .attr("height", height)
                             .attr("width", width);
 
+
                         d3.json("us-states.json", function(json) {
+
+                            for (var i = 0; i < data.length; i++) {
+                                var dataState = data[i].state;
+                                var dataValue = parseFloat(data[i].value);
+
+                                //Find the corresponding state inside the GeoJSON
+                                for (var j = 0; j < json.features.length; j++) {
+
+                                    var jsonState = json.features[j].properties.name;
+
+                                    if (dataState == jsonState) {
+
+                                        //Copy the data value into the JSON
+                                        json.features[j].properties.value = dataValue;
+
+                                        //Stop looking through the JSON
+                                        break;
+
+                                    }
+                                }
+                            }
+
                             svg.selectAll("path")
                                 .data(json.features)
                                 .enter()
                                 .append("path")
                                 .attr("d", path)
-                                .style("fill", "steelblue");
+                                .style("fill", function(d) {
+                                    var value = d.properties.value;
+
+                                    if (value) {
+                                        return color(value);
+                                    } else {
+                                        return "#ccc";
+                                    }
+                            });
                         });
                     });
-
                 } else {
                     hide.addClass('hide');
                     message.text('Please submit a search term');
