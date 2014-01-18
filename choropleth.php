@@ -87,7 +87,9 @@
                                         .duration(200)
                                         .style("opacity", .9);
 
-                                    div .html("Your term(s) appeared in <br/>" + d.properties.value + " records in " +
+                                    var count = (typeof d.properties.value === "undefined") ? 0 :d.properties.value;
+
+                                    div .html("Your term(s) appeared in <br/>" + count + " records in " +
                                             d.properties.name
                                             + "<br/><br/>Click highlighted bar to view records")
                                         .style("left", (d3.event.pageX - 28) + "px")
