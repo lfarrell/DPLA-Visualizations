@@ -2,16 +2,43 @@
 include_once 'dpla.php';
 
 class DplaHistogram extends DplaBase {
+    public function curl_call() {
+        if(!$this->decade) {
+            $returned_records = array();
+            $decades =  range(1800, 2010, 10);
+
+            $i = 0;
+            foreach($decades as $decade) {
+                $page = $i + 1;
+                $data = $this->base_call($page, $decade, $decade + 9);
+
+                $records = $this->get_json($data);
+
+                $returned_records[$i]['decade'] = $decade;
+                $returned_records[$i]['count'] = $records['count'];
+
+                $i++;
+            }
+        } else {
+            $records = $this->base_call();
+            $returned_records = $this->get_record_sample($records);
+        }
+
+
+        echo json_encode($returned_records);
+    }
+
+
     /**
      * @return mixed
      */
-    public function curl_call() {
-        if(!$this->decade) {
-            $full_call = $this->q . "&fields=sourceResource.date.displayDate&page_size=500&api_key=" . $this->api_key;
-        } else {
+    private function base_call($page=1, $decade_start = '', $decade_end = '') {
+        if($this->decade) {
+            $decade_start = $this->decade;
             $decade_end = $this->decade + 9;
-            $full_call = $this->q . "&sourceResource.temporal.begin=$this->decade&sourceResource.temporal.end=$decade_end&api_key=" . $this->api_key;
         }
+
+        $full_call = $this->q . "&sourceResource.temporal.begin=$decade_start&sourceResource.temporal.end=$decade_end&page=$page&api_key=" . $this->api_key;
 
         $ch = curl_init($full_call);
         curl_setopt($ch, CURLOPT_HEADER, 0);
@@ -22,24 +49,14 @@ class DplaHistogram extends DplaBase {
         return $data;
     }
 
-    private function get_all_results($response) {
-        $start = 0;
-        $records = json_decode($response, true);
-
-        $total_records = $records['count'];
-    }
-
     /**
      * @param $response
      * @return mixed|void
      */
-    public function process_json($response) {
-        $records = $this->get_json($response);
-
-
+    public function process_json($records) {
         // Get rid of entries with no date
         $years = array();
-        foreach($records['docs'] as $record) {
+        foreach($records as $record) {
             if(!empty($record['sourceResource.date.displayDate'])) {
                 $years[] = $record['sourceResource.date.displayDate'];
             }
@@ -101,13 +118,5 @@ class DplaHistogram extends DplaBase {
     }
 }
 
-if($_GET) {
-    $img = new DplaHistogram($api_key, $_GET);
-    $response = $img->curl_call();
-}
-
-if(!$_GET['decade']) {
-    $img->process_json($response);
-} else {
-    $img->get_record_sample($response);
-}
+$img = new DplaHistogram($api_key, $_GET);
+$response = $img->curl_call();
