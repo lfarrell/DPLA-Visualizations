@@ -114,20 +114,6 @@
             fill: brown;
             fill-opacity: .7;
         }
-
-        div.tooltip {
-            position: absolute;
-            text-align: center;
-            width:  auto;
-            height: auto;
-            padding: 5px;
-            fill: black;
-            font: 12px sans-serif;
-            background: lightgray;
-            border: 0px;
-            border-radius: 8px;
-            pointer-events: none;
-        }
     </style>
 </head>
 <body>

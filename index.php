@@ -145,20 +145,6 @@
             fill: orange;
         }
 
-        div.tooltip {
-            position: absolute;
-            text-align: center;
-            width:  auto;
-            height: auto;
-            padding: 5px;
-            fill: black;
-            font: 12px sans-serif;
-            background: lightgray;
-            border: 0px;
-            border-radius: 8px;
-            pointer-events: none;
-        }
-
         #records h2 {
             margin: 15px 0 -5px 25px;
         }
