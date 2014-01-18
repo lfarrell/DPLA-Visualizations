@@ -37,6 +37,10 @@
                         var path = d3.geo.path()
                             .projection(projection);
 
+                        var div = d3.select("body").append("div")
+                            .attr("class", "tooltip")
+                            .style("opacity", 0);
+
                         var svg = d3.select("body").append("svg")
                             .attr("height", height)
                             .attr("width", width);
@@ -78,7 +82,22 @@
                                     } else {
                                         return "#ccc";
                                     }
-                            });
+                                }).on("mouseover", function(d) {
+                                    div.transition()
+                                        .duration(200)
+                                        .style("opacity", .9);
+
+                                    div .html("Your term(s) appeared in <br/>" + d.properties.value + " records in " +
+                                            d.properties.name
+                                            + "<br/><br/>Click highlighted bar to view records")
+                                        .style("left", (d3.event.pageX - 28) + "px")
+                                        .style("top", (d3.event.pageY - 28) + "px");
+                                })
+                                .on("mouseout", function() {
+                                    div.transition()
+                                        .duration(500)
+                                        .style("opacity", 0);
+                                });
                         });
                     });
                 } else {
@@ -92,6 +111,20 @@
         path:hover {
             fill: brown;
             fill-opacity: .7;
+        }
+
+        div.tooltip {
+            position: absolute;
+            text-align: center;
+            width:  auto;
+            height: auto;
+            padding: 5px;
+            fill: black;
+            font: 12px sans-serif;
+            background: lightgray;
+            border: 0px;
+            border-radius: 8px;
+            pointer-events: none;
         }
     </style>
 </head>
