@@ -185,5 +185,6 @@
 </form>
 <p id="message"></p>
 <img src="ajax-loader.gif" alt="load indicator" id="hide" class="hide" />
+<?php include_once 'google.php'; ?>
 </body>
 </html>

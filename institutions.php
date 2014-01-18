@@ -141,5 +141,6 @@
 <?php include_once 'header.php'; ?>
 <h1>DPLA Visualizations - Depositor Items Contributed</h1>
 <p>(Hover over an institutions wedge to see how many items it's contributed to the DPLA.)</p>
+<?php include_once 'google.php'; ?>
 </body>
 </html>

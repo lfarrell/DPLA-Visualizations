@@ -78,5 +78,6 @@
 <p id="message"></p>
 <img src="ajax-loader.gif" alt="load indicator" id="hide" class="hide" />
 <div id="map"></div>
+<?php include_once 'google.php'; ?>
 </body>
 </html>
