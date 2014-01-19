@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <?php include 'meta.php'; ?>
     <title>DPLA Visualizations</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.css" />

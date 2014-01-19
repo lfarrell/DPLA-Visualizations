@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <?php include 'meta.php'; ?>
     <title>DPLA Visualizations</title>
     <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="style.css" />
@@ -123,7 +124,7 @@
 </head>
 <body>
 <?php include_once 'header.php'; ?>
-<h1>DPLA Visualizations - See how your term(s) frequency changes through time</h1>
+<h1>DPLA Visualizations - See how your term(s) frequency varies by state</h1>
 <form action="#" method="post" id="d3-dpla">
     <input type="text" name="q" id="q" placeholder="Search the DPLA"/>
     <input type="submit" value="Search">
