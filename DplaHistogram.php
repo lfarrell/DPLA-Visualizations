@@ -2,6 +2,9 @@
 include_once 'dpla.php';
 
 class DplaHistogram extends DplaBase {
+    /**
+     * @return mixed|void
+     */
     public function curl_call() {
         if(!$this->decade) {
             $returned_records = array();
@@ -24,12 +27,14 @@ class DplaHistogram extends DplaBase {
             $returned_records = $this->get_record_sample($records);
         }
 
-
         echo json_encode($returned_records);
     }
 
 
     /**
+     * @param int $page
+     * @param string $decade_start
+     * @param string $decade_end
      * @return mixed
      */
     private function base_call($page=1, $decade_start = '', $decade_end = '') {
@@ -50,7 +55,8 @@ class DplaHistogram extends DplaBase {
     }
 
     /**
-     * @param $response
+     * @todo Not sure this is still needed
+     * @param $records
      * @return mixed|void
      */
     public function process_json($records) {

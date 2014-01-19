@@ -26,8 +26,12 @@ class DplaTimeMap extends DplaBase {
         return $returned_records;
     }
 
+    /**
+     * @param int $page
+     * @return mixed
+     */
     private function base_call($page=1) {
-        $full_call = $this->q . "&sourceResource.spatial.country=United+States&fields=sourceResource.identifier,sourceResource.spatial.state&page_size=500&page=$page&api_key=" . $this->api_key;
+        $full_call = $this->q . "&sourceResource.spatial.country=United+States&fields=sourceResource.spatial.state&page_size=500&page=$page&api_key=" . $this->api_key;
         $ch = curl_init($full_call);
         curl_setopt($ch, CURLOPT_HEADER, 0);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -85,6 +89,9 @@ class DplaTimeMap extends DplaBase {
         echo json_encode($d3_states);
     }
 
+    /**
+     * @return array
+     */
     private function states() {
         return array('AL'=>"Alabama", 'AK'=>"Alaska", 'AZ'=>"Arizona", 'AR'=>"Arkansas", 'CA'=>"California", 'CO'=>"Colorado", 'CT'=>"Connecticut", 'DE'=>"Delaware", 'DC'=>"District Of Columbia", 'FL'=>"Florida", 'GA'=>"Georgia", 'HI'=>"Hawaii", 'ID'=>"Idaho", 'IL'=>"Illinois", 'IN'=>"Indiana", 'IA'=>"Iowa", 'KS'=>"Kansas", 'KY'=>"Kentucky", 'LA'=>"Louisiana", 'ME'=>"Maine", 'MD'=>"Maryland", 'MA'=>"Massachusetts", 'MI'=>"Michigan", 'MN'=>"Minnesota", 'MS'=>"Mississippi", 'MO'=>"Missouri", 'MT'=>"Montana", 'NE'=>"Nebraska", 'NV'=>"Nevada", 'NH'=>"New Hampshire", 'NJ'=>"New Jersey", 'NM'=>"New Mexico", 'NY'=>"New York", 'NC'=>"North Carolina", 'ND'=>"North Dakota", 'OH'=>"Ohio", 'OK'=>"Oklahoma", 'OR'=>"Oregon", 'PA'=>"Pennsylvania", 'RI'=>"Rhode Island", 'SC'=>"South Carolina", 'SD'=>"South Dakota", 'TN'=>"Tennessee", 'TX'=>"Texas", 'UT'=>"Utah", 'VT'=>"Vermont", 'VA'=>"Virginia", 'WA'=>"Washington", 'WV'=>"West Virginia", 'WI'=>"Wisconsin", 'WY'=>"Wyoming");
     }

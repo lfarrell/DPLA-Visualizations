@@ -27,8 +27,9 @@
 
                         var color = d3.scale.quantize()
                             .domain([0, d3.max(data, function(d) { return d.value; })])
-                            .range(["rgb(51,102,204)", "rgb(0,0,255)",
-                                "rgb(0,0,204)", "rgb(0,0,153)","rgb(0,0,102)"]);
+                            .range(["rgb(252,187,161)",
+                                    "rgb(252,146,114)","rgb(251,106,74)", "rgb(239,59,44)",
+                                    "rgb(203,24,29)","rgb(153,0,13)"]);
 
                         var projection = d3.geo.albersUsa()
                             .translate([width/2, height/2])
@@ -47,7 +48,6 @@
 
 
                         d3.json("us-states.json", function(json) {
-
                             for (var i = 0; i < data.length; i++) {
                                 var dataState = data[i].state;
                                 var dataValue = parseFloat(data[i].value);
@@ -74,6 +74,7 @@
                                 .enter()
                                 .append("path")
                                 .attr("d", path)
+                                .style("stroke", 6)
                                 .style("fill", function(d) {
                                     var value = d.properties.value;
 
@@ -110,6 +111,10 @@
         });
     </script>
     <style type="text/css">
+        path {
+            stroke: gray;
+            shape-rendering: crispEdges;
+        }
         path:hover {
             fill: brown;
             fill-opacity: .7;
