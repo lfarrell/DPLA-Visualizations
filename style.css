@@ -31,6 +31,10 @@ body {
     color: lightgray;
 }
 
+h1 {
+    font-weight: normal;
+}
+
 h1, p {
     text-align: center;
 }
