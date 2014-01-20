@@ -86,14 +86,12 @@
                                     d3.select("body").append("div")
                                         .attr("id", "records");
 
-
-
                                     var recs = $('#records');
                                     recs.html('<img src="ajax-loader.gif"/>')
 
                                     $.get("DplaHistogram.php?q=" + q + "&decade=" + d.decade, function(data) {
                                         if(data.length === 0) {
-                                            recs.html("<p>there were no records to add.</p>");
+                                            recs.html("<p>There were no records to add.</p>");
                                         } else {
                                             recs.html(data);
                                         }

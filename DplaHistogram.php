@@ -27,7 +27,7 @@ class DplaHistogram extends DplaBase {
             $returned_records = $this->get_record_sample($records);
         }
 
-        echo json_encode($returned_records);
+        echo is_array($returned_records) ? json_encode($returned_records) : $returned_records;
     }
 
 
@@ -116,7 +116,7 @@ class DplaHistogram extends DplaBase {
         $html .= "<ul>";
         foreach($records['docs'] as $record) {
             $title = (is_array($record['sourceResource']['title'])) ? $record['sourceResource']['title'][0] : $record['sourceResource']['title'];
-                $html .= '<li><a href="http://dp.la/item/' . $record['id'] . '" target="_blank">' . $title . '</a></li>';
+            $html .= '<li><a href="http://dp.la/item/' . $record['id'] . '" target="_blank">' . $title . '</a></li>';
         }
         $html .= "</ul>";
 
