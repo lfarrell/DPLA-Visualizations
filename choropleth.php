@@ -100,7 +100,7 @@
                                         .style("opacity", 0);
                                 })
                                 .on("click", function(d) {
-                                    window.location =  "http://dp.la/search?q=" + d.properties.query + "&state[]=" + d.properties.name;
+                                    window.open("http://dp.la/search?q=" + d.properties.query + "&state[]=" + d.properties.name,  '_blank');
                                 });
                         });
                     });
