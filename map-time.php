@@ -84,6 +84,8 @@ class DplaTimeMap extends DplaBase {
         foreach($states as $key => $value) { // js objectify
             $d3_states[$i]['state'] = $key;
             $d3_states[$i]['value'] = $value;
+            $d3_states[$i]['query'] = $this->terms;
+
             $i++;
         }
         echo json_encode($d3_states);

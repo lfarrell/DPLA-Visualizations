@@ -59,13 +59,10 @@
                                     var jsonState = json.features[j].properties.name;
 
                                     if (dataState == jsonState) {
-
-                                        //Copy the data value into the JSON
                                         json.features[j].properties.value = dataValue;
+                                        json.features[j].properties.query = data[i].query;
 
-                                        //Stop looking through the JSON
                                         break;
-
                                     }
                                 }
                             }
@@ -93,7 +90,7 @@
 
                                     div .html("Your term(s) appeared in <br/>" + count + " records in " +
                                             d.properties.name
-                                            + "<br/><br/>Click highlighted bar to view records")
+                                            + "<br/><br/>Click to view records for " + d.properties.name)
                                         .style("left", (d3.event.pageX - 28) + "px")
                                         .style("top", (d3.event.pageY - 28) + "px");
                                 })
@@ -101,6 +98,9 @@
                                     div.transition()
                                         .duration(500)
                                         .style("opacity", 0);
+                                })
+                                .on("click", function(d) {
+                                    window.location =  "http://dp.la/search?q=" + d.properties.query + "&state[]=" + d.properties.name;
                                 });
                         });
                     });

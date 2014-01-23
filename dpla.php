@@ -11,7 +11,8 @@ abstract class DplaBase {
      */
     public function __construct($api_key, $query) {
         $this->api_key = $api_key;
-        $this->q = "http://api.dp.la/v2/items?q=" . $this->clean($query['q']);
+        $this->terms = $this->clean($query['q']);
+        $this->q = "http://api.dp.la/v2/items?q=" . $this->terms;
         $this->decade = (isset($query['decade'])) ? $this->clean($query['decade']) : false;
     }
 

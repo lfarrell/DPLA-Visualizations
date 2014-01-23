@@ -13,7 +13,7 @@ class DplaHistogram extends DplaBase {
             $i = 0;
             foreach($decades as $decade) {
                 $page = $i + 1;
-                $data = $this->base_call($page, $decade, $decade + 9);
+                $data = $this->base_call($decade, $decade + 9);
 
                 $records = $this->get_json($data);
 
@@ -37,14 +37,13 @@ class DplaHistogram extends DplaBase {
      * @param string $decade_end
      * @return mixed
      */
-    private function base_call($page=1, $decade_start = '', $decade_end = '') {
+    private function base_call($decade_start = '', $decade_end = '') {
         if($this->decade) {
             $decade_start = $this->decade;
             $decade_end = $this->decade + 9;
         }
 
-        $full_call = $this->q . "&sourceResource.temporal.begin=$decade_start&sourceResource.temporal.end=$decade_end&page=$page&api_key=" . $this->api_key;
-
+        $full_call = $this->q . "&sourceResource.temporal.begin=$decade_start&sourceResource.temporal.end=$decade_end&api_key=" . $this->api_key;
         $ch = curl_init($full_call);
         curl_setopt($ch, CURLOPT_HEADER, 0);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -119,6 +118,8 @@ class DplaHistogram extends DplaBase {
             $html .= '<li><a href="http://dp.la/item/' . $record['id'] . '" target="_blank">' . $title . '</a></li>';
         }
         $html .= "</ul>";
+
+        $html .= '<a href="http://dp.la/search?' . $this->terms . '">View all results for the selected decade</a>';
 
         echo $html;
     }
