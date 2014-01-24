@@ -125,6 +125,8 @@
 <body>
 <?php include_once 'header.php'; ?>
 <h1>DPLA Visualizations - See how your term(s) frequency varies by state</h1>
+<p>Note: Depending on your search terms it can take some time to return the mapped items</p>
+<p>Hover over a state to see how many items returned for that state</p>
 <form action="#" method="post" id="d3-dpla">
     <input type="text" name="q" id="q" placeholder="Search the DPLA"/>
     <input type="submit" value="Search">

@@ -110,6 +110,7 @@ class DplaHistogram extends DplaBase {
      */
     public function get_record_sample($response) {
         $records = $this->get_json($response);
+        $decade_end = $this->decade + 9;
 
         $html = "<h2>Sample records for (" . $this->get_terms() . ") for the decade $this->decade's</h2>";
         $html .= "<ul>";
@@ -119,7 +120,7 @@ class DplaHistogram extends DplaBase {
         }
         $html .= "</ul>";
 
-        $html .= '<a href="http://dp.la/search?' . $this->terms . '">View all results for the selected decade</a>';
+        $html .= '<a href="http://dp.la/search?q=' . $this->terms . '&after[month]=&after[day]=&after[year]=' . $this->decade . '&before[month]=&before[day]=&before[year]=' . $decade_end . '">View all results for "' . $this->terms . '" the ' . $this->decade . '\'s</a>';
 
         echo $html;
     }

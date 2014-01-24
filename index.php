@@ -164,6 +164,8 @@
 <body>
 <?php include_once 'header.php'; ?>
 <h1>DPLA Visualizations - See how your term(s) frequency changes through time</h1>
+<p>Note: Depending on your search terms it can take some time to return your graph</p>
+<p>Hover over a column to see how many items were returned for that decade</p>
 <form action="#" method="post" id="d3-dpla">
     <input type="text" name="q" id="q" placeholder="Search the DPLA"/>
     <input type="submit" value="Search">

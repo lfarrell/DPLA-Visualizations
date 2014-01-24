@@ -72,6 +72,8 @@
 <body>
 <?php include 'header.php'; ?>
 <h1>DPLA Visualizations - See where your term(s) are located geographically</h1>
+<p>Note: Most DPLA items don't have latitude and longitude information.
+    Depending on your search terms it can take some time to return your graph</p>
 <form action="#" method="post" id="d3-dpla">
     <input type="text" name="q" id="q" placeholder="Search the DPLA"/>
     <input type="submit" value="Search">
