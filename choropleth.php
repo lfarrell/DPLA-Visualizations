@@ -28,8 +28,7 @@
 
                         var color = d3.scale.quantize()
                             .domain([0, d3.max(data, function(d) { return d.value; })])
-                            .range(["rgb(252,187,161)",
-                                    "rgb(252,146,114)","rgb(251,106,74)", "rgb(239,59,44)",
+                            .range(["rgb(251,106,74)", "rgb(239,59,44)",
                                     "rgb(203,24,29)","rgb(153,0,13)"]);
 
                         var projection = d3.geo.albersUsa()
