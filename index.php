@@ -20,102 +20,110 @@
                 if(q) {
                     $('svg, #records').detach();
                     $.getJSON("DplaHistogram.php?q=" + q, function(data) {
-                        var margin = {top: 30, right: 20, bottom: 50, left: 28},
-                            axisPadding = 5,
-                            height = 450 - margin.top - margin.bottom,
-                            width = 1100 - margin.left - margin.right;
-
-                        var ticks = [];
-                        for(var i=0; i<data.length; i++) {
-                            ticks.push(data[i].decade);
+                        var count = 0;
+                        for(var j=0; j<data.length; j++) {
+                            count += data[j].count;
                         }
+                        if(count > 0) {
+                            var margin = {top: 30, right: 20, bottom: 50, left: 28},
+                                axisPadding = 5,
+                                height = 450 - margin.top - margin.bottom,
+                                width = 1100 - margin.left - margin.right;
 
-                        var div = d3.select("body").append("div")
-                            .attr("class", "tooltip")
-                            .style("opacity", 0);
+                            var ticks = [];
+                            for(var i=0; i<data.length; i++) {
+                                ticks.push(data[i].decade);
+                            }
 
-                        var svg = d3.select("body").append("svg")
-                                .attr("height", height + margin.top)
-                                .attr("width", width);
+                            var div = d3.select("body").append("div")
+                                .attr("class", "tooltip")
+                                .style("opacity", 0);
 
-                        var xScale = d3.scale.ordinal()
-                                .domain(ticks)
-                                .rangeRoundBands([margin.right, width], 0.05);
+                            var svg = d3.select("body").append("svg")
+                                    .attr("height", height + margin.top)
+                                    .attr("width", width);
 
-                        var yScale = d3.scale.linear()
-                                .domain([0,d3.max(data, function(d) { return d.count; })])
-                                .range([0, height]);
+                            var xScale = d3.scale.ordinal()
+                                    .domain(ticks)
+                                    .rangeRoundBands([margin.right, width], 0.05);
 
-                        var yTickScale = d3.scale.linear()
-                                .domain([d3.max(data, function(d) { return d.count; }), 0])
-                                .range([0, height]);
+                            var yScale = d3.scale.linear()
+                                    .domain([0,d3.max(data, function(d) { return d.count; })])
+                                    .range([0, height]);
 
-                        svg.selectAll("rect")
-                                .data(data, function(d) {
-                                    return d.decade;
-                                })
-                                .enter()
-                                .append("rect")
-                                .attr("x", function(d) {
-                                    return xScale(d.decade);
-                                })
-                                .attr("y", function(d) {
-                                    return height - yScale(d.count) + axisPadding;
-                                })
-                                .attr("width", xScale.rangeBand())
-                                .attr("height", function(d) {
-                                    return yScale(d.count);
-                                })
-                                .attr("fill", "steelblue")
-                                .on("mouseover", function(d) {
-                                    div.transition()
-                                        .duration(200)
-                                        .style("opacity", .9);
+                            var yTickScale = d3.scale.linear()
+                                    .domain([d3.max(data, function(d) { return d.count; }), 0])
+                                    .range([0, height]);
 
-                                    div .html("Your term(s) appeared in <br/>" + d.count + " records in the "  + d.decade + "'s"
-                                        + "<br/><br/>Click highlighted bar to view records")
-                                        .style("left", (d3.event.pageX - 28) + "px")
-                                        .style("top", (d3.event.pageY - 28) + "px");
-                                })
-                                .on("mouseout", function() {
-                                    div.transition()
-                                        .duration(500)
-                                        .style("opacity", 0);
-                                })
-                                .on("click", function(d) {
-                                    d3.select("body").append("div")
-                                        .attr("id", "records");
+                            svg.selectAll("rect")
+                                    .data(data, function(d) {
+                                        return d.decade;
+                                    })
+                                    .enter()
+                                    .append("rect")
+                                    .attr("x", function(d) {
+                                        return xScale(d.decade);
+                                    })
+                                    .attr("y", function(d) {
+                                        return height - yScale(d.count) + axisPadding;
+                                    })
+                                    .attr("width", xScale.rangeBand())
+                                    .attr("height", function(d) {
+                                        return yScale(d.count);
+                                    })
+                                    .attr("fill", "steelblue")
+                                    .on("mouseover", function(d) {
+                                        div.transition()
+                                            .duration(200)
+                                            .style("opacity", .9);
 
-                                    var recs = $('#records');
-                                    recs.html('<img src="ajax-loader.gif"/>')
+                                        div .html("Your term(s) appeared in <br/>" + d.count + " records in the "  + d.decade + "'s"
+                                            + "<br/><br/>Click highlighted bar to view records")
+                                            .style("left", (d3.event.pageX - 28) + "px")
+                                            .style("top", (d3.event.pageY - 28) + "px");
+                                    })
+                                    .on("mouseout", function() {
+                                        div.transition()
+                                            .duration(500)
+                                            .style("opacity", 0);
+                                    })
+                                    .on("click", function(d) {
+                                        d3.select("body").append("div")
+                                            .attr("id", "records");
 
-                                    $.get("DplaHistogram.php?q=" + q + "&decade=" + d.decade, function(data) {
-                                        if(data.length === 0) {
-                                            recs.html("<p>There were no records to add.</p>");
-                                        } else {
-                                            recs.html(data);
-                                        }
-                                        window.location = '#records';
+                                        var recs = $('#records');
+                                        recs.html('<img src="ajax-loader.gif"/>')
+
+                                        $.get("DplaHistogram.php?q=" + q + "&decade=" + d.decade, function(data) {
+                                            if(data.length === 0) {
+                                                recs.html("<p>There were no records to add.</p>");
+                                            } else {
+                                                recs.html(data);
+                                            }
+                                            window.location = '#records';
+                                        });
                                     });
-                                });
 
-                        var xAxis = d3.svg.axis()
-                                .scale(xScale)
-                                .orient("bottom");
+                            var xAxis = d3.svg.axis()
+                                    .scale(xScale)
+                                    .orient("bottom");
 
-                        svg.append("g")
-                                .attr("class", "axis")
-                                .attr("transform", "translate(0," + (height + axisPadding) + ")")
-                                .call(xAxis);
+                            svg.append("g")
+                                    .attr("class", "axis")
+                                    .attr("transform", "translate(0," + (height + axisPadding) + ")")
+                                    .call(xAxis);
 
-                        var yAxis = d3.svg.axis()
-                                .scale(yTickScale)
-                                .orient("left");
+                            var yAxis = d3.svg.axis()
+                                    .scale(yTickScale)
+                                    .orient("left");
 
-                        svg.append("g")
-                                .attr("class", "axis")
-                                .attr("transform", "translate(" + margin.left + "," + axisPadding +")")
-                                .call(yAxis);
+                            svg.append("g")
+                                    .attr("class", "axis")
+                                    .attr("transform", "translate(" + margin.left + "," + axisPadding +")")
+                                    .call(yAxis);
+                        } else {
+                            $('#message').text('Your search returned no results');
+                        }
 
                         hide.addClass('hide');
                     });
@@ -130,8 +138,7 @@
         .axis path,
         .axis line {
             fill: none;
-            stroke: black;
-            shape-rendering: crispEdges;
+
             padding: 5px;
         }
 

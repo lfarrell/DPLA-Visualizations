@@ -44,6 +44,7 @@ class DplaHistogram extends DplaBase {
         }
 
         $full_call = $this->q . "&sourceResource.temporal.begin=$decade_start&sourceResource.temporal.end=$decade_end&api_key=" . $this->api_key;
+
         $ch = curl_init($full_call);
         curl_setopt($ch, CURLOPT_HEADER, 0);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
