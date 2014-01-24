@@ -28,8 +28,9 @@
 
                         var color = d3.scale.quantize()
                             .domain([0, d3.max(data, function(d) { return d.value; })])
-                            .range(["rgb(251,106,74)", "rgb(239,59,44)",
-                                    "rgb(203,24,29)","rgb(153,0,13)"]);
+                            .range(["rgb(254,217,118)",
+                                    "rgb(254,178,76)","rgb(253,141,60)",
+                                    "rgb(240,59,32)", "rgb(189,0,38)"]);
 
                         var projection = d3.geo.albersUsa()
                             .translate([width/2, height/2])
@@ -125,7 +126,7 @@
 <?php include_once 'header.php'; ?>
 <h1>DPLA Visualizations - See how your term(s) frequency varies by state</h1>
 <p>Note: Depending on your search terms it can take some time to return the mapped items</p>
-<p>Hover over a state to see how many items returned for that state</p>
+<p>Hover over a state to see how many items were returned for that state</p>
 <form action="#" method="post" id="d3-dpla">
     <input type="text" name="q" id="q" placeholder="Search the DPLA"/>
     <input type="submit" value="Search">
