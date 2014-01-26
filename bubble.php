@@ -93,7 +93,7 @@
         }
 
         p {
-            margin-bottom: -40px;
+            margin-bottom: -75px;
         }
         text {
             font-family: Raleway sans-serif;
