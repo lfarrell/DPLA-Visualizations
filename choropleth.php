@@ -86,7 +86,7 @@
                                         .duration(200)
                                         .style("opacity", .9);
 
-                                    var count = (typeof d.properties.value === "undefined") ? 0 :d.properties.value;
+                                    var count = (typeof d.properties.value === "undefined") ? 0 : formatCount(d.properties.value);
 
                                     div .html("Your term(s) appeared in <br/>" + count + " records in " +
                                             d.properties.name
@@ -109,6 +109,10 @@
                     message.text('Please submit a search term');
                 }
             });
+
+            function formatCount(number) {
+                return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
         });
     </script>
     <style type="text/css">
@@ -119,6 +123,9 @@
         path:hover {
             fill: brown;
             fill-opacity: .7;
+        }
+        svg {
+            margin-left: 20%;
         }
     </style>
 </head>

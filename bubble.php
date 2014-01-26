@@ -47,7 +47,7 @@
                             .duration(200)
                             .style("opacity", .9);
 
-                        div .html(d.value + " books/journals are in "  + d.language
+                        div .html(format(d.value) + " books/journals are in "  + d.language
                                 + "<br/>Click to view books in this language")
                             .style("top", (d3.event.pageY-28)+"px")
                             .style("left", (d3.event.pageX-28)+"px");
@@ -81,18 +81,32 @@
             }
 
             function formatCount(number) {
-                number.toString()
+                return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             }
 
             d3.select(self.frameElement).style("height", diameter + "px");
         });
     </script>
     <style type="text/css">
+        svg {
+            margin-left: 12%;
+        }
+
+        p {
+            margin-bottom: -40px;
+        }
         text {
             font-family: Raleway sans-serif;
             font-size: 12px;
         }
+        circle:hover {
+            opacity: 0.6;
+        }
     </style>
 </head>
-<body></body>
+<body>
+<?php include_once 'header.php'; ?>
+<h1>DPLA Visualizations - Languages represented in the DPLA Bookshelf</h1>
+<p>Hover over a bubble to see how many items there are for a particular language</p>
+</body>
 </html>

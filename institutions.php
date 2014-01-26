@@ -62,7 +62,7 @@
                         .duration(200)
                         .style("opacity", .9);
 
-                    div .html("The " + d.data.org + " has contributed <br/>" + d.data.items + " items to the DPLA")
+                    div .html("The " + d.data.org + " has contributed <br/>" + formatCount(d.data.items) + " items to the DPLA")
                         .style("left", (d3.event.pageX - 28) + "px")
                         .style("top", (d3.event.pageY - 28) + "px");
                 })
@@ -114,11 +114,19 @@
                         .style("fill", "black")
                         .text(d.org);
                 });
+
+            function formatCount(number) {
+                return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
         })();
     </script>
     <style type="text/css">
+        svg {
+            margin-left: 17%;
+        }
+
         text {
-            font-family: sans-serif;
+            font-family: Raleway, sans-serif;
             font-size: 12px;
             fill: white;
         }
