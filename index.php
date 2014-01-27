@@ -138,8 +138,9 @@
         .axis path,
         .axis line {
             fill: none;
-
             padding: 5px;
+            stroke: black;
+            shape-rendering: crispEdges;
         }
 
         .axis text {
