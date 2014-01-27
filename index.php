@@ -167,6 +167,17 @@
             text-decoration: none;
             color: steelblue;
         }
+
+        #results {
+            margin-bottom: 50px;
+        }
+
+        #full_results {
+            height: auto;
+            width: auto;
+            padding: 10px;
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>

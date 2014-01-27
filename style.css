@@ -43,7 +43,7 @@ h1 + p {
     margin-top: -1%;
 }
 
-input {
+input, #full_results {
     border: 1px solid gainsboro;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
@@ -56,7 +56,7 @@ input[type=text] {
     font-size: .9em;
 }
 
-input[type=submit] {
+input[type=submit], #full_results {
     color: white;
     background-color: steelblue;
     border-color: steelblue;

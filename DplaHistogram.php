@@ -121,7 +121,7 @@ class DplaHistogram extends DplaBase {
         }
         $html .= "</ul>";
 
-        $html .= '<a href="http://dp.la/search?q=' . $this->terms . '&after[month]=&after[day]=&after[year]=' . $this->decade . '&before[month]=&before[day]=&before[year]=' . $decade_end . '">View all results for "' . $this->terms . '" the ' . $this->decade . '\'s</a>';
+        $html .= '<div id="results"><a id="full_results" href="http://dp.la/search?q=' . $this->terms . '&after[month]=&after[day]=&after[year]=' . $this->decade . '&before[month]=&before[day]=&before[year]=' . $decade_end . '">View all results for "' . $this->terms . '" in the ' . $this->decade . '\'s</a></div>';
 
         echo $html;
     }
