@@ -40,7 +40,7 @@
                                 .style("opacity", 0);
 
                             var svg = d3.select("body").append("svg")
-                                    .attr("height", height + margin.top)
+                                    .attr("height", height + margin.top + margin.bottom)
                                     .attr("width", width);
 
                             var xScale = d3.scale.ordinal()
@@ -88,13 +88,15 @@
                                             .style("opacity", 0);
                                     })
                                     .on("click", function(d) {
+                                        hide.removeClass('hide');
+
                                         d3.select("body").append("div")
                                             .attr("id", "records");
 
                                         var recs = $('#records');
-                                        recs.html('<img src="ajax-loader.gif"/>')
 
                                         $.get("DplaHistogram.php?q=" + q + "&decade=" + d.decade, function(data) {
+                                            hide.addClass('hide');
                                             if(data.length === 0) {
                                                 recs.html("<p>There were no records to add.</p>");
                                             } else {
@@ -112,6 +114,12 @@
                                     .attr("class", "axis")
                                     .attr("transform", "translate(0," + (height + axisPadding) + ")")
                                     .call(xAxis);
+
+                            svg.append("text")
+                                .attr("x", width / 2)
+                                .attr("y", height + margin.bottom)
+                                .style("text-anchor", "middle")
+                                .text("Decades")
 
                             var yAxis = d3.svg.axis()
                                     .scale(yTickScale)
@@ -144,7 +152,7 @@
         }
 
         .axis text {
-            font-family: sans-serif;
+            font-family: Raleway, sans-serif;
             font-size: 11px;
         }
 
@@ -178,6 +186,8 @@
             padding: 10px;
             text-decoration: none;
         }
+
+
     </style>
 </head>
 <body>
