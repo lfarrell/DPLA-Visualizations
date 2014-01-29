@@ -25,7 +25,7 @@
                             count += data[j].count;
                         }
                         if(count > 0) {
-                            var margin = {top: 30, right: 20, bottom: 50, left: 28},
+                            var margin = {top: 30, right: 20, bottom: 50, left: 50},
                                 axisPadding = 5,
                                 height = 450 - margin.top - margin.bottom,
                                 width = 1100 - margin.left - margin.right;
@@ -45,7 +45,7 @@
 
                             var xScale = d3.scale.ordinal()
                                     .domain(ticks)
-                                    .rangeRoundBands([margin.right, width], 0.05);
+                                    .rangeRoundBands([53, width], 0.05);
 
                             var yScale = d3.scale.linear()
                                     .domain([0,d3.max(data, function(d) { return d.count; })])
@@ -112,7 +112,7 @@
 
                             svg.append("g")
                                     .attr("class", "axis")
-                                    .attr("transform", "translate(0," + (height + axisPadding) + ")")
+                                    .attr("transform", "translate(-3," + (height + axisPadding) + ")")
                                     .call(xAxis);
 
                             svg.append("text")
@@ -129,6 +129,13 @@
                                     .attr("class", "axis")
                                     .attr("transform", "translate(" + margin.left + "," + axisPadding +")")
                                     .call(yAxis);
+
+                            svg.append("text")
+                                .attr("transform", "rotate(-90)")
+                                .attr("y", 15)
+                                .attr("x", 0 - (height/2))
+                                .style("text-anchor", "middle")
+                                .text("Item Count")
                         } else {
                             $('#message').text('Your search returned no results');
                         }
