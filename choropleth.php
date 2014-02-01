@@ -24,13 +24,14 @@
                         message.text("Your search phrase: " + q);
 
                         var height = 600,
-                            width = 850;
+                            width = 875,
+                            color_range = ["rgb(254,217,118)",
+                                "rgb(254,178,76)","rgb(253,141,60)",
+                                "rgb(240,59,32)", "rgb(189,0,38)"];
 
                         var color = d3.scale.quantize()
                             .domain([0, d3.max(data, function(d) { return d.value; })])
-                            .range(["rgb(254,217,118)",
-                                    "rgb(254,178,76)","rgb(253,141,60)",
-                                    "rgb(240,59,32)", "rgb(189,0,38)"]);
+                            .range(color_range);
 
                         var projection = d3.geo.albersUsa()
                             .translate([width/2, height/2])
@@ -102,6 +103,48 @@
                                 .on("click", function(d) {
                                     window.open("http://dp.la/search?q=" + d.properties.query + "&state[]=" + d.properties.name,  '_blank');
                                 });
+
+                            var all_colors = ["rgb(204, 204, 204)"].concat(color_range);
+
+                            svg.append("text")
+                                .attr("x", width - 60)
+                                .attr("y", height - (height / 2) - 5)
+                                .attr("height",30)
+                                .attr("width",100)
+                                .attr("dx", "-15px")
+                                .style("fill", "black")
+                                .style("text-anchor", "center")
+                                .text("Fewer items");
+
+                            var legend = svg.append("g")
+                                .attr("class", "legend")
+                                .attr("x", width - 60)
+                                .attr("y", 10)
+                                .attr("height", "auto")
+                                .attr("width", 30);
+
+                            legend.selectAll('g').data(all_colors)
+                                .enter()
+                                .append('g')
+                                .each(function(d,i) {
+                                    var g = d3.select(this);
+                                    g.append("rect")
+                                        .attr("x", width - 55)
+                                        .attr("y", (height - height /2) + i * 25)
+                                        .attr("width", 30)
+                                        .attr("height", 30)
+                                        .style("fill", d);
+                                });
+
+                            svg.append("text")
+                                .attr("x", width - 60)
+                                .attr("y", height - (height - 470))
+                                .attr("height",30)
+                                .attr("width",100)
+                                .attr("dx", "-15px")
+                                .style("fill", "black")
+                                .style("text-anchor", "center")
+                                .text("More items");
                         });
                     });
                 } else {
@@ -125,7 +168,12 @@
             fill-opacity: .7;
         }
         svg {
-            margin-left: 20%;
+            margin-left: 15%;
+        }
+
+        text {
+            font-size: 12px;
+            font-family: Raleway, sans-serif;
         }
     </style>
 </head>
