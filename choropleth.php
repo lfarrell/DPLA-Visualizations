@@ -160,7 +160,7 @@
     </script>
     <style type="text/css">
         path {
-            stroke: gray;
+            stroke: white;
             shape-rendering: crispEdges;
         }
         path:hover {
