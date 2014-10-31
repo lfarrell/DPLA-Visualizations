@@ -9,25 +9,29 @@
     <script type="text/javascript">
         (window.onload = function() {
             var contributors = [
-                {"org": "HathiTrust", "items": 1751866},
-                {"org": "Smithsonian Institution", "items": 712494},
-                {"org": "National Archives and Records Administration", "items": 701357},
-                {"org": "Portal to Texas History", "items": 327446},
-                {"org": "University of Southern California. Libraries", "items": 270464},
-                {"org": "Digital Library of Georgia", "items": 186246},
-                {"org": "North Carolina Digital Heritage Center", "items": 171083},
-                {"org": "Biodiversity Heritage Library", "items": 121633},
-                {"org": "Internet Archive", "items": 120545},
-                {"org": "Kentucky Digital Library", "items": 100834},
-                {"org": "Digital Commonwealth", "items": 76961},
-                {"org": "South Carolina Digital Library", "items": 55183},
-                {"org": "David Rumsey", "items": 45575},
-                {"org": "Minnesota Digital Library", "items": 38172},
+                {"org": "HathiTrust", "items": 1914614},
+                {"org": "New York Public Library", "items": 1168386},
+                {"org": "Smithsonian Institution", "items": 897196},
+                {"org": "Mountain West Digital Library", "items": 867246},
+                {"org": "National Archives and Records Administration", "items": 700952},
+                {"org": "Portal to Texas History", "items": 477639},
+                {"org": "University of Southern California. Libraries", "items": 301325},
+                {"org": "North Carolina Digital Heritage Center", "items": 260709},
+                {"org": "Digital Library of Georgia", "items": 259640},
+                {"org": "Internet Archive", "items": 208953},
+                {"org:" "GPO", "items": 148715},
+                {"org:" "Biodiversity Heritage Library", "items": 136444 },
+                {"org": "Kentucky Digital Library", "items": 127755},
+                {"org": "Digital Commonwealth", "items": 124804},
+                {"org": "J. Paul Getty Trust", "items": 92681},
+                {"org": "South Carolina Digital Library", "items": 76001},
+                {"org": "ARTstor", "items": 56342},
+                {"org": "David Rumsey", "items": 48132},
+                {"org": "Missouri Hub", "items": 41557},
+                {"org": "Minnesota Digital Library", "items": 40533},
                 {"org": "University of Virginia Library", "items": 30188},
-                {"org": "University of Illinois at Urbana-Champaign", "items": 17546},
-                {"org": "New York Public Library", "items": 13478},
-                {"org": "Harvard Library", "items": 10557},
-                {"org": "ARTstor", "items": 10184}
+                {"org": "University of Illinois at Urbana-Champaign", "items": 18103},
+                {"org": "Harvard Library", "items": 9068}
             ];
             var div = d3.select("body").append("div")
                 .attr("class", "tooltip")
