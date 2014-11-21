@@ -153,7 +153,9 @@
 <body>
 <?php include_once 'header.php'; ?>
 <h1>DPLA Visualizations - Depositor Items Contributed</h1>
-<p>(Hover over an institutions wedge to see how many items it's contributed to the DPLA.)</p>
+<p>I'm leaving this here for historical reasons, but a pie chart, particularly of this size isn't really a good idea. For a better
+representation of hub contributions look <a href="partners_alt.php">here</a>.
+    <p>(Hover over an institutions wedge to see how many items it's contributed to the DPLA.)</p>
 <?php include_once 'google.php'; ?>
 </body>
 </html>
