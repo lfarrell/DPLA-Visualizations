@@ -8,6 +8,7 @@
         <li><a href="partners.php">Partner Flow</a></li>
         <li><a href="/metadata_explorer">Metadata Explorer</a></li>
         <li><a href="/western_water">Western Water</a></li>
+        <li><a href="/western_wildfire">Western Wildfire</a></li>
         <li><a href="/">Back to Main Site</a> </li>
     </ul>
 </div>
