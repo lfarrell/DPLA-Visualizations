@@ -107,7 +107,7 @@
 <body>
 <?php include_once 'header.php'; ?>
 <h1>DPLA Visualizations - Less common languages represented in the DPLA Bookshelf</h1>
-<h4>The top 10 languages are represented seperately</h4>
+<h4>The top 10 languages are represented separately</h4>
 <p>Hover over a bubble to see how many items there are for a particular language</p>
 <?php include_once 'google.php'; ?>
 </body>
